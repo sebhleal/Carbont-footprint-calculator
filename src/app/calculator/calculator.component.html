@@ -1,0 +1,49 @@
+<div class="calculator-container">
+    <h2>Calcule a sua Pegada de Carbono</h2>
+    <form (ngSubmit)="calculateFootprint()">
+      <div>
+        <label>Quantas pessoas vivem na sua casa:</label>
+        <input type="number" [(ngModel)]="household.people" name="people" required>
+      </div>
+      <div>
+        <label>Gasto em eletricidade por mês:</label>
+        <select [(ngModel)]="household.electricity" name="electricity" required>
+          <option value="low">Pouco</option>
+          <option value="medium">Médio</option>
+          <option value="high">Muito</option>
+        </select>
+      </div>
+      <div>
+        <label>Tipo de gás utilizado:</label>
+        <input type="text" [(ngModel)]="household.gas" name="gas" required>
+      </div>
+      <div>
+        <label>Km por semana:</label>
+        <input type="number" [(ngModel)]="transport.km" name="km" required>
+      </div>
+      <div>
+        <label>Método utilizado:</label>
+        <select [(ngModel)]="transport.method" name="method" required>
+          <option value="personal">Veículo pessoal</option>
+          <option value="bus">Autocarro</option>
+        </select>
+      </div>
+      <div>
+        <label>Voos por ano:</label>
+        <input type="number" [(ngModel)]="transport.flights" name="flights" required>
+      </div>
+      <div>
+        <label>Tempo médio dos voos:</label>
+        <input type="number" [(ngModel)]="transport.flightTime" name="flightTime" required>
+      </div>
+      <div>
+        <label>Dias por semana que come carne:</label>
+        <input type="number" [(ngModel)]="food.meatDays" name="meatDays" required>
+      </div>
+      <div>
+        <label>Faz reciclagem?</label>
+        <input type="checkbox" [(ngModel)]="waste.recycling" name="recycling">
+      </div>
+      <button type="submit">Calcular</button>
+    </form>
+  </div>
