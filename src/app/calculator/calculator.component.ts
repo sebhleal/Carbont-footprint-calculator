@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class CalculatorComponent {
   household = {
-    people: 0,
+    people: "",
     electricity: '',
     electricityOptions: [
       { label: "Low (≤ 70 kWh/month)", value: "70" },
@@ -15,7 +15,7 @@ export class CalculatorComponent {
       { label: "High (≥ 150 kWh/month)", value: "150" }
     ],
     gas: '',
-    peopleArray: [1, 2, 3, 4],
+    peopleArray: [1, 2, 3, 4,5,6],
   };
   transport = {
     km: 0,
@@ -24,8 +24,8 @@ export class CalculatorComponent {
     flightTime: 0
   };
   food = {
-    meatDays: 0,
-    meatDaysArray: [1,2,3,4,5,6,7],
+    meatDays: "",
+    meatDaysArray: [0,1,2,3,4,5,6,7],
   };
   waste = {
     recycling: false
