@@ -1,49 +1,118 @@
 <div class="calculator-container">
-    <h2>Calcule a sua Pegada de Carbono</h2>
-    <form (ngSubmit)="calculateFootprint()">
-      <div>
-        <label>Quantas pessoas vivem na sua casa:</label>
-        <input type="number" [(ngModel)]="household.people" name="people" required>
+  <h2>Calculate your Carbon Footprint</h2>
+  <form (ngSubmit)="calculateFootprint()">
+    <div>
+      <div class="title-container home-energy">
+        <h4>Home Energy</h4>
+      </div>
+      <label class="insight">Insight: A significant portion of household emissions comes from electricity and heating.</label>
+      <button type="button" class="learn-tips-button" (click)="showTips('homeEnergy')">Learn a few tips</button>
+      <div *ngIf="tipsVisible === 'homeEnergy'" class="popup-overlay">
+        <div class="popup">
+          <p>✅ Switch to LED bulbs.</p>
+          <p>✅ Unplug electronics when not in use.</p>
+          <p>✅ Consider solar panels or green energy.</p>
+          <button type="button" (click)="closeTips()">Close</button>
+        </div>
       </div>
       <div>
-        <label>Gasto em eletricidade por mês:</label>
-        <select [(ngModel)]="household.electricity" name="electricity" required>
-          <option value="low">Pouco</option>
-          <option value="medium">Médio</option>
-          <option value="high">Muito</option>
+        <label>How many people live in your household:</label>
+        <select [(ngModel)]="household.people" name="people" required>
+          <option *ngFor="let person of household.peopleArray" [value]="person">{{ person }}</option>
         </select>
       </div>
       <div>
-        <label>Tipo de gás utilizado:</label>
-        <input type="text" [(ngModel)]="household.gas" name="gas" required>
+        <label>Electricity expense per month:</label>
+        <select [(ngModel)]="household.electricity" name="electricity" required>
+          <option *ngFor="let electricity of household.electricityOptions" [value]="electricity">{{ electricity }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <div class="title-container transportation">
+        <h4>Transportation</h4>
+      </div>
+      <label class="insight">Insight: Personal vehicles are a major contributor to carbon emissions.</label>
+      <button type="button" class="learn-tips-button" (click)="showTips('transportation')">Learn a few tips</button>
+      <div *ngIf="tipsVisible === 'transportation'" class="popup-overlay">
+        <div class="popup">
+          <p>✅ Walk, bike, or use public transportation.</p>
+          <p>✅ Carpool to reduce emissions.</p>
+          <p>✅ Maintain your vehicle for fuel efficiency.</p>
+          <button type="button" (click)="closeTips()">Close</button>
+        </div>
       </div>
       <div>
-        <label>Km por semana:</label>
+        <label>Number of kilometers traveled in a week:</label>
         <input type="number" [(ngModel)]="transport.km" name="km" required>
       </div>
-      <div>
-        <label>Método utilizado:</label>
-        <select [(ngModel)]="transport.method" name="method" required>
-          <option value="personal">Veículo pessoal</option>
-          <option value="bus">Autocarro</option>
-        </select>
+    </div>
+
+    <div>
+      <div class="title-container air-transportation">
+        <h4>Air Transportation</h4>
+      </div>
+      <label class="insight">Insight: Air travel has a high carbon footprint, especially long-haul flights.</label>
+      <button type="button" class="learn-tips-button" (click)="showTips('airTransportation')">Learn a few tips</button>
+      <div *ngIf="tipsVisible === 'airTransportation'" class="popup-overlay">
+        <div class="popup">
+          <p>✅ Choose direct flights to reduce emissions.</p>
+          <p>✅ Pack light to lower fuel consumption.</p>
+          <p>✅ Offset flights by supporting carbon reduction projects.</p>
+          <button type="button" (click)="closeTips()">Close</button>
+        </div>
       </div>
       <div>
-        <label>Voos por ano:</label>
+        <label>Number of flights per year:</label>
         <input type="number" [(ngModel)]="transport.flights" name="flights" required>
       </div>
-      <div>
-        <label>Tempo médio dos voos:</label>
-        <input type="number" [(ngModel)]="transport.flightTime" name="flightTime" required>
+    </div>
+
+    <div>
+      <div class="title-container food">
+        <h4>Food</h4>
+      </div>
+      <label class="insight">Insight: The food we eat has a significant environmental impact, from production to waste.</label>
+      <button type="button" class="learn-tips-button" (click)="showTips('food')">Learn a few tips</button>
+      <div *ngIf="tipsVisible === 'food'" class="popup-overlay">
+        <div class="popup">
+          <p>✅ Eat more plant-based meals.</p>
+          <p>✅ Buy local and seasonal foods.</p>
+          <p>✅ Reduce food waste by planning meals.</p>
+          <button type="button" (click)="closeTips()">Close</button>
+        </div>
       </div>
       <div>
-        <label>Dias por semana que come carne:</label>
-        <input type="number" [(ngModel)]="food.meatDays" name="meatDays" required>
+        <label>How many days a week do you eat meat:</label>
+        <select [(ngModel)]="food.meatDays" name="meatDays" required>
+          <option *ngFor="let days of food.meatDaysArray" [value]="days">{{ days }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <div class="title-container waste">
+        <h4>Waste</h4>
+      </div>
+      <label class="insight">Insight: Landfills produce methane, a potent greenhouse gas.</label>
+      <button type="button" class="learn-tips-button" (click)="showTips('waste')">Learn a few tips</button>
+      <div *ngIf="tipsVisible === 'waste'" class="popup-overlay">
+        <div class="popup">
+          <p>✅ Reduce waste by using reusable items.</p>
+          <p>✅ Compost organic waste.</p>
+          <p>✅ Recycle properly based on your local guidelines.</p>
+          <button type="button" (click)="closeTips()">Close</button>
+        </div>
       </div>
       <div>
-        <label>Faz reciclagem?</label>
+        <label>Do you recycle?</label>
         <input type="checkbox" [(ngModel)]="waste.recycling" name="recycling">
       </div>
-      <button type="submit">Calcular</button>
-    </form>
-  </div>
+    </div>
+
+    <button class="submit" type="submit">Calculate</button>
+  </form>
+</div>
+
+

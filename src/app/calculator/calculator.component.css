@@ -1,0 +1,90 @@
+
+.title-container{
+    border: px solid #ffffff;  /* White border (you can change the color) */
+    border-radius: 20px;        /* Rounded corners */
+    padding-left: 10px;              /* Adds space around the text */
+    line-height: 30px;  
+    filter: brightness(0.8) saturate(1.1);  
+}
+
+.home-energy {
+    background-color: rgba(62, 142, 65, 0.7);  /* Soft Green */
+    
+}
+  
+.transportation {
+    background-color: rgba(58, 110, 165, 0.7);
+}
+  
+.air-transportation {
+    background-color: rgba(92, 139, 141, 0.7);
+}
+  
+.food {
+    background-color: rgba(158, 123, 91, 0.7);
+}
+  
+.waste {
+    background-color: rgba(183, 167, 50, 0.7);
+}
+
+.insight {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.learn-tips-button {
+  font-size: 12px;
+  color: #007BFF;
+  cursor: pointer;
+  margin-bottom: 10px;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  padding: 0;
+  display: inline;
+  text-align: left;
+}
+
+.learn-tips-button:hover {
+  text-decoration: none;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.submit {
+  cursor: pointer;
+  background-color: #1e8d0a;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.submit:hover {
+  background-color: #1a7d09;
+}
