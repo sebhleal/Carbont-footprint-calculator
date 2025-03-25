@@ -1,3 +1,57 @@
+.calculator-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .topic-container {
+    margin-bottom: 20px;
+  }
+  
+  
+  .info-box {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .learn-tips-button {
+    font-size: 12px;
+    color: #007BFF;
+    cursor: pointer;
+    margin-bottom: 10px;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    padding: 0;
+    display: inline;
+  }
+  
+  .selects-container {
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .selects-container select, 
+  .selects-container input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .selects-container .checkbox {
+    width: auto; /* Prevent checkbox from stretching */
+    margin-right: 10px; /* Add space between checkbox and label */
+  }
 
 .title-container{
     border: px solid #ffffff;  /* White border (you can change the color) */
@@ -70,9 +124,15 @@
   padding: 20px;
   border-radius: 8px;
   width: 300px;
-  text-align: center;
+  text-align: left;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+.small-info {
+    font-size: 12px;
+    color: #666; /* Subtle color to keep it less prominent */
+    margin-left: 5px;
+  }
 
 .submit {
   cursor: pointer;

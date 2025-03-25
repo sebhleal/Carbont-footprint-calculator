@@ -9,7 +9,11 @@ export class CalculatorComponent {
   household = {
     people: 0,
     electricity: '',
-    electricityOptions: ["Low", "Medium", "High"],
+    electricityOptions: [
+      { label: "Low (≤ 70 kWh/month)", value: "70" },
+      { label: "Medium (~110 kWh/month)", value: "110" },
+      { label: "High (≥ 150 kWh/month)", value: "150" }
+    ],
     gas: '',
     peopleArray: [1, 2, 3, 4],
   };
@@ -30,7 +34,7 @@ export class CalculatorComponent {
 
   calculateFootprint() {
     // Lógica para calcular a pegada de carbono
-    console.log('Calculando a pegada de carbono...');
+    console.log(this.household.electricity);
   }
 
   showTips(section: string) {
