@@ -1,138 +1,154 @@
-<div class="calculator-container">
-  <h2>Calculate your Carbon Footprint</h2>
+<div class="container mt-4">
+  <h2 class="text-center">Calculate your Carbon Footprint</h2>
   <form (ngSubmit)="calculateFootprint()">
 
     <!-- Home Energy -->
-    <div class="topic-container">
-      <div class="title-container home-energy">
-        <h4>Home Energy</h4>  
+    <div class="card mb-4">
+      <div class="card-header home-energy text-white">
+        <h4 class="mb-0">Home Energy</h4>
       </div>
-      <div class="info-box">
-        <label class="insight">Insight: A significant portion of household emissions comes from electricity and
-          heating.</label>
-        <button type="button" class="learn-tips-button" (click)="showTips('homeEnergy')">Learn a few tips</button>
-      </div>
-      <div *ngIf="tipsVisible === 'homeEnergy'" class="popup-overlay">
-        <div class="popup">
-          <p>• Switch to LED bulbs.</p>
-          <p>• Unplug electronics when not in use.</p>
-          <p>• Consider solar panels or green energy.</p>
-          <button type="button" (click)="closeTips()">Close</button>
+      <div class="card-body">
+        <div class="mb-4">
+          <p class="text-muted mb-0">Insight: A significant portion of household emissions comes from electricity and heating.</p>
+          <button type="button" class="btn btn-link p-0" (click)="showTips('homeEnergy')">Learn a few tips</button>
         </div>
-      </div>
-      <div class="selects-container">
-        <label>How many people live in your household:</label>
-        <select [(ngModel)]="household.people" name="people" required>
-          <option value="" disabled selected>Select an option</option>
-          <option *ngFor="let person of household.peopleArray" [value]="person">{{ person }}</option>
-        </select>
-        <label>Electricity expense per month:<span class="small-info">(The values are on average per
-            person)</span></label>
-        <select [(ngModel)]="household.electricity" name="electricity" required>
-          <option value="" disabled selected>Select an option</option>
-          <option *ngFor="let option of household.electricityOptions" [value]="option.value">{{ option.label }}</option>
-        </select>
+        <div *ngIf="tipsVisible === 'homeEnergy'" class="alert alert-info mt-2">
+          <ul>
+            <li>Switch to LED bulbs.</li>
+            <li>Unplug electronics when not in use.</li>
+            <li>Consider solar panels or green energy.</li>
+          </ul>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">How many people live in your household:</label>
+          <select class="form-select" [(ngModel)]="household.people" name="people" required>
+            <option value="" disabled selected>Select an option</option>
+            <option *ngFor="let person of household.peopleArray" [value]="person">{{ person }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Electricity expense per month: <span class="small-info">(The values are on average per person)</span></label>
+          <select class="form-select" [(ngModel)]="household.electricity" name="electricity" required>
+            <option value="" disabled selected>Select an option</option>
+            <option *ngFor="let option of household.electricityOptions" [value]="option.value">{{ option.label }}</option>
+          </select>
+        </div>
       </div>
     </div>
 
     <!-- Transportation -->
-    <div class="topic-container">
-      <div class="title-container transportation">
-        <h4>Transportation</h4>
+    <div class="card mb-4">
+      <div class="card-header transportation text-white">
+        <h4 class="mb-0">Transportation</h4>
       </div>
-      <div class="info-box">
-        <label class="insight">Insight: Personal vehicles are a major contributor to carbon emissions.</label>
-        <button type="button" class="learn-tips-button" (click)="showTips('transportation')">Learn a few tips</button>
-      </div>
-      <div *ngIf="tipsVisible === 'transportation'" class="popup-overlay">
-        <div class="popup">
-          <p>✅ Walk, bike, or use public transportation.</p>
-          <p>✅ Carpool to reduce emissions.</p>
-          <p>✅ Maintain your vehicle for fuel efficiency.</p>
-          <button type="button" (click)="closeTips()">Close</button>
+      <div class="card-body">
+        <div class="mb-4">
+          <p class="text-muted mb-0">Insight: Personal vehicles are a major contributor to carbon emissions.</p>
+          <button type="button" class="btn btn-link p-0" (click)="showTips('transportation')">Learn a few tips</button>
         </div>
-      </div>
-      <div class="selects-container">
-        <label>Number of kilometers traveled in a week:</label>
-        <input type="number" [(ngModel)]="transport.km" name="km" required>
+        <div *ngIf="tipsVisible === 'transportation'" class="alert alert-info mt-2">
+          <ul>
+            <li>Walk, bike, or use public transportation.</li>
+            <li>Carpool to reduce emissions.</li>
+            <li>Maintain your vehicle for fuel efficiency.</li>
+          </ul>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Number of kilometers traveled in a week:</label>
+          <select class="form-select" [(ngModel)]="transport.km" name="km" required>
+            <option value="" disabled selected>Select an option</option>
+            <option *ngFor="let option of transport.kmOptions" [value]="option.value">{{ option.label }}</option>
+          </select>
+          </div>
       </div>
     </div>
 
     <!-- Air Transportation -->
-    <div class="topic-container">
-      <div class="title-container air-transportation">
-        <h4>Air Transportation</h4>
+    <div class="card mb-4">
+      <div class="card-header air-transportation text-white">
+        <h4 class="mb-0">Air Transportation</h4>
       </div>
-      <div class="info-box">
-        <label class="insight">Insight: Air travel has a high carbon footprint, especially long-haul flights.</label>
-        <button type="button" class="learn-tips-button" (click)="showTips('airTransportation')">Learn a few
-          tips</button>
-      </div>
-      <div *ngIf="tipsVisible === 'airTransportation'" class="popup-overlay">
-        <div class="popup">
-          <p>✅ Choose direct flights to reduce emissions.</p>
-          <p>✅ Pack light to lower fuel consumption.</p>
-          <p>✅ Offset flights by supporting carbon reduction projects.</p>
-          <button type="button" (click)="closeTips()">Close</button>
+      <div class="card-body">
+        <div class="mb-4">
+          <p class="text-muted mb-0">Insight: Air travel has a high carbon footprint, especially long-haul flights.</p>
+          <button type="button" class="btn btn-link p-0" (click)="showTips('airTransportation')">Learn a few tips</button>
         </div>
-      </div>
-      <div class="selects-container">
-        <label>Number of flights per year:</label>
-        <input type="number" [(ngModel)]="transport.flights" name="flights" required>
+        <div *ngIf="tipsVisible === 'airTransportation'" class="alert alert-info mt-2">
+          <ul>
+            <li>Choose direct flights to reduce emissions.</li>
+            <li>Pack light to lower fuel consumption.</li>
+            <li>Offset flights by supporting carbon reduction projects.</li>
+          </ul>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Number of flights per year:</label>
+          <input type="number" class="form-control" [(ngModel)]="transport.flights" name="flights" required>
+        </div>
       </div>
     </div>
 
     <!-- Food -->
-    <div class="topic-container">
-      <div class="title-container food">
-        <h4>Food</h4>
+    <div class="card mb-4">
+      <div class="card-header food text-white">
+        <h4 class="mb-0">Food</h4>
       </div>
-      <div class="info-box">
-        <label class="insight">Insight: The food we eat has a significant environmental impact, from production to
-          waste.</label>
-        <button type="button" class="learn-tips-button" (click)="showTips('food')">Learn a few tips</button>
-      </div>
-      <div *ngIf="tipsVisible === 'food'" class="popup-overlay">
-        <div class="popup">
-          <p>✅ Eat more plant-based meals.</p>
-          <p>✅ Buy local and seasonal foods.</p>
-          <p>✅ Reduce food waste by planning meals.</p>
-          <button type="button" (click)="closeTips()">Close</button>
+      <div class="card-body">
+        <div class="mb-4">
+          <p class="text-muted mb-0">Insight: The food we eat has a significant environmental impact, from production to waste.</p>
+          <button type="button" class="btn btn-link p-0" (click)="showTips('food')">Learn a few tips</button>  
         </div>
-      </div>
-      <div class="selects-container">
-        <label>How many days a week do you eat meat:</label>
-        <select [(ngModel)]="food.meatDays" name="meatDays" required>
-          <option value="" disabled selected>Select an option</option>
-          <option *ngFor="let days of food.meatDaysArray" [value]="days">{{ days }}</option>
-        </select>
+        
+        <div *ngIf="tipsVisible === 'food'" class="alert alert-info mt-2">
+          <ul>
+            <li>Eat more plant-based meals.</li>
+            <li>Buy local and seasonal foods.</li>
+            <li>Reduce food waste by planning meals.</li>
+          </ul>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">How many days a week do you eat meat:</label>
+          <select class="form-select" [(ngModel)]="food.meatDays" name="meatDays" required>
+            <option value="" disabled selected>Select an option</option>
+            <option *ngFor="let days of food.meatDaysArray" [value]="days">{{ days }}</option>
+          </select>
+        </div>
       </div>
     </div>
 
     <!-- Waste -->
-    <div class="topic-container">
-      <div class="title-container waste">
-        <h4>Waste</h4>
+    <div class="card mb-4">
+      <div class="card-header waste text-white">
+        <h4 class="mb-0">Waste</h4>
       </div>
-      <div class="info-box">
-        <label class="insight">Insight: Landfills produce methane, a potent greenhouse gas.</label>
-        <button type="button" class="learn-tips-button" (click)="showTips('waste')">Learn a few tips</button>
-      </div>
-      <div *ngIf="tipsVisible === 'waste'" class="popup-overlay">
-        <div class="popup">
-          <p>✅ Reduce waste by using reusable items.</p>
-          <p>✅ Compost organic waste.</p>
-          <p>✅ Recycle properly based on your local guidelines.</p>
-          <button type="button" (click)="closeTips()">Close</button>
+      <div class="card-body">
+        <div class="mb-4">
+          <p class="text-muted mb-0">Insight: Landfills produce methane, a potent greenhouse gas.</p>
+          <button type="button" class="btn btn-link p-0" (click)="showTips('waste')">Learn a few tips</button>  
         </div>
-      </div>
-      <div class="selects-container">
-        <label>Do you recycle?</label>
-        <input type="checkbox" [(ngModel)]="waste.recycling" name="recycling">
+        
+        <div *ngIf="tipsVisible === 'waste'" class="alert alert-info mt-2">
+          <ul>
+            <li>Reduce waste by using reusable items.</li>
+            <li>Compost organic waste.</li>
+            <li>Recycle properly based on your local guidelines.</li>
+          </ul>
+        </div>
+
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" [(ngModel)]="waste.recycling" name="recycling">
+          <label class="form-check-label">Do you recycle?</label>
+        </div>
       </div>
     </div>
 
     <!-- Submit Button -->
-    <button class="submit" type="submit">Calculate</button>
+    <div class="text-center">
+      <button class="btn btn-success" type="submit">Calculate</button>
+    </div>
   </form>
 </div>

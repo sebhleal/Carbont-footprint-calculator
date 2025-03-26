@@ -18,7 +18,12 @@ export class CalculatorComponent {
     peopleArray: [1, 2, 3, 4,5,6],
   };
   transport = {
-    km: 0,
+    km: '',
+    kmOptions: [
+      { label: "Low (≤ 50 km/week)", value: "1" },
+      { label: "Medium (50-250 km/week)", value: "2" },
+      { label: "High (≥ 250 km/week)", value: "3" }
+    ],
     method: '',
     flights: 0,
     flightTime: 0
@@ -38,10 +43,8 @@ export class CalculatorComponent {
   }
 
   showTips(section: string) {
-    this.tipsVisible = section;
+    this.tipsVisible = this.tipsVisible === section ? '' : section;
   }
 
-  closeTips() {
-    this.tipsVisible = '';
-  }
+ 
 }

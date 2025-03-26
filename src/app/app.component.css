@@ -1,0 +1,75 @@
+/* General Navbar Styles */
+.navbar {
+  background-color: #4caf50; /* The exact color of Bootstrap's btn-success */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+.navbar .navbar-brand {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: white !important;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+  margin-left: 5%;
+}
+
+.navbar .navbar-brand:hover {
+  color: #414040 !important; /* Hover color */
+}
+
+.navbar .nav-link {
+  font-family: "Poppins", sans-serif;
+  color: white !important;
+  font-weight: 500;
+  padding: 10px 15px;
+  font-size: 1rem;
+  text-transform: uppercase; /* Uppercase letters */
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+  color: #414040 !important; /* Hover text color */
+}
+
+.navbar .navbar-toggler {
+  border-color: white;
+}
+
+.navbar .navbar-toggler-icon {
+  background-color: white;
+}
+
+.navbar-nav {
+  margin-left: auto; /* Right align navbar items */
+}
+
+/* For larger screens */
+@media (min-width: 992px) {
+  .navbar-nav {
+    display: flex; /* Use flexbox to arrange nav items horizontally */
+  }
+}
+
+/* For smaller screens */
+@media (max-width: 991px) {
+  .navbar-nav {
+    text-align: center; /* Center align nav items on mobile */
+  }
+  .nav-link {
+    padding: 12px 20px; /* Increased padding for better touch targets */
+  }
+}
+
+/* Add active class styling for the navbar links */
+.nav-item.active {
+  background-color: #414040; /* Add the background color you want for active items */
+}
+
+.nav-item.active .nav-link {
+  color: #fff !important; /* Change text color if needed */
+}
+
+/* Add some space between the navbar and the content below */
+.navbar + .container {
+  margin-top: 20px;
+}
