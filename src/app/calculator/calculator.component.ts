@@ -1,4 +1,49 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { CarbonCalculationService } from '../carbon-calculation.service';
+
+// Define interfaces for strong typing
+interface ElectricityOption {
+  label: string;
+  value: string;
+}
+
+interface TransportOption {
+  label: string;
+  value: string;
+}
+
+interface Household {
+  people: string;
+  electricity: string;
+  electricityOptions: ElectricityOption[];
+  gas: string;
+  peopleArray: number[];
+}
+
+interface Transport {
+  km: string;
+  kmOptions: TransportOption[];
+  method: string;
+  flights: number;
+  flightTime: number;
+}
+
+interface Food {
+  meatDays: string;
+  meatDaysArray: number[];
+}
+
+interface Waste {
+  recycling: boolean;
+}
+
+interface CarbonFootprintInput {
+  household: Household;
+  transport: Transport;
+  food: Food;
+  waste: Waste;
+}
 
 @Component({
   selector: 'app-calculator',
@@ -6,7 +51,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./calculator.component.css']
 })
 export class CalculatorComponent {
-  household = {
+  household: Household = {
     people: "",
     electricity: '',
     electricityOptions: [
@@ -15,9 +60,10 @@ export class CalculatorComponent {
       { label: "High (≥ 150 kWh/month)", value: "150" }
     ],
     gas: '',
-    peopleArray: [1, 2, 3, 4,5,6],
+    peopleArray: [1, 2, 3, 4, 5, 6],
   };
-  transport = {
+
+  transport: Transport = {
     km: '',
     kmOptions: [
       { label: "Low (≤ 50 km/week)", value: "1" },
@@ -28,23 +74,40 @@ export class CalculatorComponent {
     flights: 0,
     flightTime: 0
   };
-  food = {
+
+  food: Food = {
     meatDays: "",
-    meatDaysArray: [0,1,2,3,4,5,6,7],
+    meatDaysArray: [0, 1, 2, 3, 4, 5, 6, 7],
   };
-  waste = {
+
+  waste: Waste = {
     recycling: false
   };
+
   tipsVisible: string = '';
 
-  calculateFootprint() {
-    // Lógica para calcular a pegada de carbono
-    console.log(this.household.electricity);
-  }
-
-  showTips(section: string) {
+  showTips(section: string): void {
     this.tipsVisible = this.tipsVisible === section ? '' : section;
   }
 
- 
+  constructor(
+    private carbonCalculationService: CarbonCalculationService,
+    private router: Router
+  ) {}
+
+  calculateFootprint(): void {
+    const carbonFootprintInput: CarbonFootprintInput = {
+      household: this.household,
+      transport: this.transport,
+      food: this.food,
+      waste: this.waste
+    };
+
+    const carbonFootprint = this.carbonCalculationService.calculateCarbonFootprint(carbonFootprintInput);
+
+    // Navigate to results page with calculation data
+    this.router.navigate(['/results'], { 
+      state: { carbonFootprint: carbonFootprint } 
+    });
+  }
 }

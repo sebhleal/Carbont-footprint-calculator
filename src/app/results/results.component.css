@@ -1,0 +1,47 @@
+.results-container {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .card {
+    border: none;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .recommendations .list-group-item {
+    border-left: 4px solid #2ecc71;
+    transition: all 0.3s ease;
+  }
+  
+  .recommendations .list-group-item:hover {
+    background-color: #f4f4f4;
+    transform: translateX(10px);
+  }
+  
+  .alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+  }
+  
+  .alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    color: #856404;
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+  }

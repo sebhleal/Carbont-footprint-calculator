@@ -1,24 +1,29 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CalculatorComponent } from './calculator/calculator.component';
+import { ResultsComponent } from './results/results.component';
+import { CarbonCalculationService } from './carbon-calculation.service';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    CalculatorComponent
+    CalculatorComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
+    RouterModule,
+    AppRoutingModule,
   ],
-  providers: [],
+  providers: [CarbonCalculationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

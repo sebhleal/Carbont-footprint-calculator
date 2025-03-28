@@ -1,0 +1,55 @@
+/* Hero Section Styles */
+.hero-section {
+    background: linear-gradient(135deg, #e0f3e0 0%, #b0e0b0 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hero-content {
+    max-width: 900px;
+    transition: all 0.3s ease;
+  }
+  
+  .hero-content:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* Responsive Typography */
+  @media (max-width: 768px) {
+    .display-4 {
+      font-size: 2.5rem;
+    }
+    .lead {
+      font-size: 1rem;
+    }
+  }
+  
+  /* Button Styles */
+  .btn-primary {
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: #27ae60;
+    border-color: #27ae60;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-outline-secondary {
+    border-color: #34495e;
+    color: #34495e;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-outline-secondary:hover {
+    background-color: #34495e;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
