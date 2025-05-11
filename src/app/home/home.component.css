@@ -1,55 +1,86 @@
-/* Hero Section Styles */
+/* Hero Section */
 .hero-section {
-    background: linear-gradient(135deg, #e0f3e0 0%, #b0e0b0 100%);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh; 
+}
+
+.hero-title {
+  font-size: 6rem;
+  font-weight: normal;
+  color: #222;
+}
+
+.hero-subtitle {
+  font-size: 1.4rem;
+  color: #666;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 4px solid #666; /* Cursor effect */
+  width: 0;
+  animation: typing 3s steps(30) 1s forwards, blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
   }
-  
-  .hero-content {
-    max-width: 900px;
-    transition: all 0.3s ease;
+  to {
+    width: 70%;
   }
-  
-  .hero-content:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
   }
-  
-  /* Responsive Typography */
-  @media (max-width: 768px) {
-    .display-4 {
-      font-size: 2.5rem;
-    }
-    .lead {
-      font-size: 1rem;
-    }
+}
+
+/* Button Styling */
+.btn-success {
+  background-color: #28a745;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 24px;
+  font-size: 1.4rem;
+  transition: all 0.3s ease-in-out;
+  opacity: 0; /* Start with invisible */
+  animation: fadeIn 2s ease-out 3s forwards; /* Fade in after 4 seconds */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  /* Button Styles */
-  .btn-primary {
-    background-color: #2ecc71;
-    border-color: #2ecc71;
-    transition: all 0.3s ease;
+  to {
+    opacity: 1;
   }
-  
-  .btn-primary:hover {
-    background-color: #27ae60;
-    border-color: #27ae60;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 3rem; /* Smaller font size for mobile */
   }
-  
-  .btn-outline-secondary {
-    border-color: #34495e;
-    color: #34495e;
-    transition: all 0.3s ease;
+
+  .hero-subtitle {
+    font-size: 1.2rem; /* Adjust subtitle size */
   }
-  
-  .btn-outline-secondary:hover {
-    background-color: #34495e;
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+  .btn-success {
+    font-size: 1.1rem; /* Smaller button font size */
+    padding: 10px 20px; /* Adjust button padding */
   }
+
+  .hero-section {
+    min-height: 50vh; /* Reduce height on mobile */
+  }
+}

@@ -3,27 +3,25 @@ import { Router } from '@angular/router';
 import { CarbonCalculationService } from '../carbon-calculation.service';
 
 // Define interfaces for strong typing
-interface ElectricityOption {
+interface Option {
   label: string;
   value: string;
 }
 
-interface TransportOption {
-  label: string;
-  value: string;
+interface QuestionStep {
+  question: string;
+  options: Option[];
+  key: keyof CarbonFootprintInput;
 }
 
 interface Household {
   people: string;
   electricity: string;
-  electricityOptions: ElectricityOption[];
   gas: string;
-  peopleArray: number[];
 }
 
 interface Transport {
   km: string;
-  kmOptions: TransportOption[];
   method: string;
   flights: number;
   flightTime: number;
@@ -31,7 +29,6 @@ interface Transport {
 
 interface Food {
   meatDays: string;
-  meatDaysArray: number[];
 }
 
 interface Waste {
@@ -51,63 +48,98 @@ interface CarbonFootprintInput {
   styleUrls: ['./calculator.component.css']
 })
 export class CalculatorComponent {
-  household: Household = {
-    people: "",
-    electricity: '',
-    electricityOptions: [
-      { label: "Low (≤ 70 kWh/month)", value: "70" },
-      { label: "Medium (~110 kWh/month)", value: "110" },
-      { label: "High (≥ 150 kWh/month)", value: "150" }
-    ],
-    gas: '',
-    peopleArray: [1, 2, 3, 4, 5, 6],
+  // Carbon footprint input data
+  carbonData: CarbonFootprintInput = {
+    household: { people: '', electricity: '', gas: '' },
+    transport: { km: '', method: '', flights: 0, flightTime: 0 },
+    food: { meatDays: '' },
+    waste: { recycling: false }
   };
 
-  transport: Transport = {
-    km: '',
-    kmOptions: [
-      { label: "Low (≤ 50 km/week)", value: "1" },
-      { label: "Medium (50-250 km/week)", value: "2" },
-      { label: "High (≥ 250 km/week)", value: "3" }
-    ],
-    method: '',
-    flights: 0,
-    flightTime: 0
-  };
+  // Steps array to manage questions dynamically
+  steps: QuestionStep[] = [
+    {
+      question: "How many people live in your household?",
+      options: [
+        { label: "1 person", value: "1" },
+        { label: "2 people", value: "2" },
+        { label: "3 people", value: "3" },
+        { label: "4+ people", value: "4" }
+      ],
+      key: "household"
+    },
+    {
+      question: "How much electricity do you consume?",
+      options: [
+        { label: "Low (≤ 70 kWh/month)", value: "70" },
+        { label: "Medium (~110 kWh/month)", value: "110" },
+        { label: "High (≥ 150 kWh/month)", value: "150" }
+      ],
+      key: "household"
+    },
+    {
+      question: "How many kilometers do you travel per week?",
+      options: [
+        { label: "Low (≤ 50 km/week)", value: "1" },
+        { label: "Medium (50-250 km/week)", value: "2" },
+        { label: "High (≥ 250 km/week)", value: "3" }
+      ],
+      key: "transport"
+    },
+    {
+      question: "How many days a week do you eat meat?",
+      options: [
+        { label: "0-1 days", value: "1" },
+        { label: "2-3 days", value: "2" },
+        { label: "4-5 days", value: "3" },
+        { label: "6-7 days", value: "4" }
+      ],
+      key: "food"
+    }
+  ];
 
-  food: Food = {
-    meatDays: "",
-    meatDaysArray: [0, 1, 2, 3, 4, 5, 6, 7],
-  };
-
-  waste: Waste = {
-    recycling: false
-  };
-
-  tipsVisible: string = '';
-
-  showTips(section: string): void {
-    this.tipsVisible = this.tipsVisible === section ? '' : section;
-  }
+  currentStepIndex = 0;
 
   constructor(
     private carbonCalculationService: CarbonCalculationService,
     private router: Router
   ) {}
 
+  // Get current step
+  get currentStep(): QuestionStep {
+    return this.steps[this.currentStepIndex];
+  }
+
+  // Handle option selection
+  selectOption(option: Option): void {
+    const key = this.currentStep.key as keyof CarbonFootprintInput;
+    if (typeof this.carbonData[key] === 'object') {
+      (this.carbonData[key] as any)[Object.keys(this.carbonData[key] as object)[0]] = option.value;
+    }
+    if (this.currentStepIndex < this.steps.length - 1) {
+      this.currentStepIndex++;
+    } else {
+      this.calculateFootprint();
+    }
+  }
+
+  // Check if an option is selected
+  isSelected(option: Option): boolean {
+    const key = this.currentStep.key as keyof CarbonFootprintInput;
+    return (this.carbonData[key] as any)[Object.keys(this.carbonData[key] as object)[0]] === option.value;
+  }
+
+  // Move to previous step
+  prevStep(): void {
+    if (this.currentStepIndex > 0) {
+      this.currentStepIndex--;
+    }
+  }
+
+  // Calculate carbon footprint
   calculateFootprint(): void {
-    const carbonFootprintInput: CarbonFootprintInput = {
-      household: this.household,
-      transport: this.transport,
-      food: this.food,
-      waste: this.waste
-    };
-
-    const carbonFootprint = this.carbonCalculationService.calculateCarbonFootprint(carbonFootprintInput);
-
-    // Navigate to results page with calculation data
     this.router.navigate(['/results'], { 
-      state: { carbonFootprint: carbonFootprint } 
+      state: { carbonFootprint: this.carbonCalculationService.calculateCarbonFootprint(this.carbonData) }
     });
   }
 }
